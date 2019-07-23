@@ -22,6 +22,8 @@ describe('APITest', async () => {
 
 		async process() {
 			this
+				.setHeaders({ 'some-header': 123 })
+				.setCookies({ 'some-cookie': 321 })
 				.setBody({ a: 2 })
 				.setCode(200);
 		}
@@ -198,7 +200,7 @@ describe('APITest', async () => {
 		await assert.rejects(() => apiTest.assert({
 			response: { code: 999 }
 		}), {
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: 200,
 			expected: 999
 		});
@@ -217,7 +219,7 @@ describe('APITest', async () => {
 		await assert.rejects(() => apiTest.assert({
 			response: { code: 200, body: 10 }
 		}), {
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: 20,
 			expected: 10
 		});
@@ -237,7 +239,7 @@ describe('APITest', async () => {
 			response: { code: 200, headers: { 'other-header': 123 } }
 		}), {
 			// the assert is assert(typeof response.headers[name] !== 'undefined');
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: false,
 			expected: true
 		});
@@ -257,7 +259,7 @@ describe('APITest', async () => {
 			response: { code: 200, headers: { 'my-header': 321 } }
 		}), {
 			// header found but with other value
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: 123,
 			expected: 321
 		});
@@ -277,7 +279,7 @@ describe('APITest', async () => {
 			response: { code: 200, strictHeaders: { 'my-header': 123 } }
 		}), {
 			// header found but with other value
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: { 'my-header': 123, 'other-header': 321 },
 			expected: { 'my-header': 123 }
 		});
@@ -297,7 +299,7 @@ describe('APITest', async () => {
 			response: { code: 200, cookies: { 'other-cookie': 123 } }
 		}), {
 			// the assert is assert(typeof response.cookies[name] !== 'undefined');
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: false,
 			expected: true
 		});
@@ -317,7 +319,7 @@ describe('APITest', async () => {
 			response: { code: 200, cookies: { 'my-cookie': 321 } }
 		}), {
 			// cookie found but with other value
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: 123,
 			expected: 321
 		});
@@ -337,14 +339,14 @@ describe('APITest', async () => {
 			response: { code: 200, strictCookies: { 'my-cookie': 123 } }
 		}), {
 			// cookie found but with other value
-			name: 'AssertionError',
+			code: 'ERR_ASSERTION',
 			actual: { 'my-cookie': 123, 'other-cookie': 321 },
 			expected: { 'my-cookie': 123 }
 		});
 	});
 
 	APITestCaller(APICompleteClass, [{
-		description: 'bar',
+		description: 'should set response code, body, headers and cookie',
 		before: () => {},
 		after: () => {},
 		request: {
@@ -354,7 +356,10 @@ describe('APITest', async () => {
 			cookies: { 'some-cookie': 321 }
 		},
 		response: {
-			body: { a: 2 }
+			code: 200,
+			body: { a: 2 },
+			strictHeaders: { 'some-header': 123 },
+			strictCookies: { 'some-cookie': 321 }
 		}
 	}]);
 
