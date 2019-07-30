@@ -38,8 +38,8 @@ describe('MyAPI Tests', () => {
 The api tester can receive 3 parameters
 `fs.readFile(MyAPIClass[, endpoint], rules) `
 
-` MyAPIClass ` => `<class>` | The class
-`endpoint` => [Optional] => <string> | The endpoint that should use to run the test
+`MyAPIClass` => `<class>` | The class to test
+`endpoint` => `<string>` *[Optional]* | The endpoint that should use to run the test
 `rules ` => `<array>` | array of test that will run individual.
 
 ```js
