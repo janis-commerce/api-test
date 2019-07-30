@@ -29,6 +29,16 @@ describe('APITest', async () => {
 		}
 	}
 
+	APITestCaller(APIClass, '/custom/path/to/my/api', [{
+		description: 'should response an empty body and a 200 http code using a endpoint',
+		prepare: () => {},
+		request: {},
+		response: {
+			code: 200,
+			body: {}
+		}
+	}]);
+
 	context('rules validation will fail', () => {
 
 		const notAnArray = [1, true, 'foo', { a: 1 }];

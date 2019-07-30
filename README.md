@@ -33,7 +33,34 @@ describe('MyAPI Tests', () => {
 	}]);
 
 });
+```
+## Api Parameters
+The api tester can receive 3 parameters
+`fs.readFile(MyAPIClass[, endpoint], rules) `
 
+` MyAPIClass ` => `<class>` | The class
+`endpoint` => [Optional] => <string> | The endpoint that should use to run the test
+`rules ` => `<array>` | array of test that will run individual.
+
+```js
+const APITest = require('@janiscommerce/api-test');
+const MyAPIClass = require('path/to/my-api');
+
+describe('MyAPI Tests', () => {
+
+	APITest(MyAPIClass, '/path/to/my-api', [{
+		description: 'should do something when other thing happend',
+		request: {
+			data: { foo: 123 },
+			endpoint: '/custom/endpoint/for/current/test'
+		},
+		response: {
+			code: 200, // default
+			body: { result: 1 }
+		}
+	}]);
+
+});
 ```
 
 ## Rule components
@@ -48,6 +75,9 @@ An object with the request data. This field is
 
 - **request.data** *object*
 Optional data that the API will received.
+
+- **request.endpoint** *string*
+Optional endpoint that the execution has to use for that specific rule.
 
 - **request.pathParameters** *object*
 Optional pathParameters that the API will received.
