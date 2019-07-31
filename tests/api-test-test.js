@@ -357,9 +357,14 @@ describe('APITest', async () => {
 
 	APITestCaller(APICompleteClass, [{
 		description: 'should set response code, body, headers and cookie',
+		client: {
+			id: 1,
+			name: 'my-client-name'
+		},
 		before: () => {},
 		after: () => {},
 		request: {
+			endpoint: 'custom-endpoint',
 			data: { fooData: 1 },
 			pathParameters: [1, 2],
 			headers: { 'some-header': 123 },
