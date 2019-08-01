@@ -370,6 +370,9 @@ describe('APITest', async () => {
 			headers: { 'some-header': 123 },
 			cookies: { 'some-cookie': 321 }
 		},
+		getResponse: () => {
+			// do something great with the response received as a param
+		},
 		response: {
 			code: 200,
 			body: { a: 2 },

@@ -125,6 +125,19 @@ Example:
 };
 ```
 
+- **getResponse** *function*
+An optional function. Returns the response before the assertions. This is helpful for debugging reasons.
+Example:
+```js
+{
+	description: 'should return 200',
+	getResponse: response => {
+		console.log(response); // use this code for debugging if your test fail!
+	},
+	response: { code: 200 }
+};
+```
+
 - **after** *function*
 An optional function for testing additional stuff.
 Receives the API response object and the [sinon sandbox](https://sinonjs.org/releases/latest/sandbox/).
@@ -149,8 +162,8 @@ Example:
 		}]
 	},
 	after: (response, sandbox) => {
-		sandbox.assert.calledOnce(SomeModel.get);
-		sandbox.assert.calledWithExactly(SomeModel.get.getCall(0), { id: 1 });
+		sandbox.assert.calledOnce(SomeModel.prototype.get);
+		sandbox.assert.calledWithExactly(SomeModel.prototype.get.getCall(0), { id: 1 });
 
 		// do somthing nice with response...
 	}
