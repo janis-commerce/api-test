@@ -381,26 +381,37 @@ describe('APITest', async () => {
 		}
 	}]);
 
-	APITestCaller(APICompleteClass, [{
-		description: 'should set response code, body, headers and cookie with default client',
+
+	class APIClientClass extends API {
+
+		async process() {
+			this
+				.setBody({ clientName: this.client.name })
+				.setCode(200);
+		}
+	}
+
+	APITestCaller(APIClientClass, [{
+		description: 'should set response code and body with default client name',
 		client: true,
-		before: () => {},
-		after: () => {},
 		request: {
-			endpoint: 'custom-endpoint',
-			data: { fooData: 1 },
-			pathParameters: [1, 2],
-			headers: { 'some-header': 123 },
-			cookies: { 'some-cookie': 321 }
-		},
-		getResponse: () => {
-			// do something great with the response received as a param
+			endpoint: 'custom-endpoint'
 		},
 		response: {
 			code: 200,
-			body: { a: 2 },
-			strictHeaders: { 'some-header': 123 },
-			strictCookies: { 'some-cookie': 321 }
+			body: { clientName: 'defaultClient' }
+		}
+	}]);
+
+	APITestCaller(APIClientClass, [{
+		description: 'should set response code, body with current injected client name',
+		client: { id: 2, name: 'newClient' },
+		request: {
+			endpoint: 'custom-endpoint'
+		},
+		response: {
+			code: 200,
+			body: { clientName: 'newClient' }
 		}
 	}]);
 
