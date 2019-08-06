@@ -381,4 +381,38 @@ describe('APITest', async () => {
 		}
 	}]);
 
+
+	class APIClientClass extends API {
+
+		async process() {
+			this
+				.setBody({ clientName: this.client.name })
+				.setCode(200);
+		}
+	}
+
+	APITestCaller(APIClientClass, [{
+		description: 'should set response code and body with default client name',
+		client: true,
+		request: {
+			endpoint: 'custom-endpoint'
+		},
+		response: {
+			code: 200,
+			body: { clientName: 'defaultClient' }
+		}
+	}]);
+
+	APITestCaller(APIClientClass, [{
+		description: 'should set response code, body with current injected client name',
+		client: { id: 2, name: 'newClient' },
+		request: {
+			endpoint: 'custom-endpoint'
+		},
+		response: {
+			code: 200,
+			body: { clientName: 'newClient' }
+		}
+	}]);
+
 });
