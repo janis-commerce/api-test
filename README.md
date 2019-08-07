@@ -75,6 +75,9 @@ These are the components of a rule.
 - **description** *string*
 The text that will be added in the `it()` function. This fields is required.
 
+- **client** *object || boolean*
+An object with the active client, or `true` to set a default client. If it's falsy, it won't inject the client.
+
 - **request** *object*
 An object with the request data. This field is
 
