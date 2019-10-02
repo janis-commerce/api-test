@@ -75,8 +75,8 @@ These are the components of a rule.
 - **description** *string*
 The text that will be added in the `it()` function. This fields is required.
 
-- **client** *object || boolean*
-An object with the active client, or `true` to set a default client. If it's falsy, it won't inject the client.
+- **session** *object || boolean*
+An object with the API session, or `true` to set a default session. If it's falsy, it won't inject the session. For session details see [@janiscommerce/api-session](https://www.npmjs.com/package/@janiscommerce/api-session)
 
 - **request** *object*
 An object with the request data. This field is
@@ -135,7 +135,7 @@ Example:
 {
 	description: 'should return 200',
 	getResponse: response => {
-		console.log(response); // use this code for debugging if your test fail!
+		console.log(response); // use this code for debugging if your test fails!
 	},
 	response: { code: 200 }
 };
@@ -187,3 +187,4 @@ These are the possible validation errors.
 |6|Invalid Rule response code. It means that the response code you sent was not a number.|
 |7|Invalid Rule response headers. It means that the response headers you sent was not an object.|
 |8|Invalid Rule response cookies. It means that the response cookies you sent was not an object.|
+|9|Invalid Rule session. It means that the API Session you sent was not an object nor a boolean.|

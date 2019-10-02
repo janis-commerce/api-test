@@ -4,8 +4,8 @@ const { API } = require('@janiscommerce/api');
 
 const assert = require('assert');
 
-const { APITest, APITestError } = require('./../lib');
-const APITestCaller = require('./..');
+const { APITest, APITestError } = require('../lib');
+const APITestCaller = require('..');
 
 describe('APITest', async () => {
 
@@ -357,10 +357,6 @@ describe('APITest', async () => {
 
 	APITestCaller(APICompleteClass, [{
 		description: 'should set response code, body, headers and cookie',
-		client: {
-			id: 1,
-			name: 'my-client-name'
-		},
 		before: () => {},
 		after: () => {},
 		request: {
@@ -386,32 +382,35 @@ describe('APITest', async () => {
 
 		async process() {
 			this
-				.setBody({ clientName: this.client.name })
+				.setBody({ clientCode: this.session.clientCode })
 				.setCode(200);
 		}
 	}
 
 	APITestCaller(APIClientClass, [{
-		description: 'should set response code and body with default client name',
-		client: true,
+		description: 'should set response code and body with default session\'s client code',
+		session: true,
 		request: {
 			endpoint: 'custom-endpoint'
 		},
 		response: {
 			code: 200,
-			body: { clientName: 'defaultClient' }
+			body: { clientCode: 'defaultClient' }
 		}
 	}]);
 
 	APITestCaller(APIClientClass, [{
-		description: 'should set response code, body with current injected client name',
-		client: { id: 2, name: 'newClient' },
+		description: 'should set response code, body with current injected client code',
+		session: {
+			clientId: 1,
+			clientCode: 'my-client-code'
+		},
 		request: {
 			endpoint: 'custom-endpoint'
 		},
 		response: {
 			code: 200,
-			body: { clientName: 'newClient' }
+			body: { clientCode: 'my-client-code' }
 		}
 	}]);
 

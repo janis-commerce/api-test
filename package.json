@@ -32,8 +32,8 @@
     "test": "tests"
   },
   "dependencies": {
-    "@janiscommerce/active-client": "^1.2.1",
-    "@janiscommerce/api": "^3.1.1",
+    "@janiscommerce/api": "^4.1.1",
+    "@janiscommerce/api-session": "^1.2.0",
     "sinon": "^7.3.2"
   }
 }
