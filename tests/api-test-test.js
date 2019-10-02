@@ -42,9 +42,11 @@ describe('APITest', async () => {
 	context('rules validation will fail', () => {
 
 		const notAnArray = [1, true, 'foo', { a: 1 }];
-		const notAnObject = [1, true, ['foo', 'bar']];
+		const notAnObject = [1, true, 'foo', ['foo', 'bar']];
 		const notAString = [1, true, ['foo', 'bar'], { foo: 'bar' }];
 		const notANumber = ['foo', true, ['foo', 'bar'], { foo: 'bar' }];
+
+		const notAnObjectNorBoolean = [1, 'foo', ['foo', 'bar']];
 
 		it('when rules given aren\'t an array', () => {
 
@@ -80,6 +82,16 @@ describe('APITest', async () => {
 				assert.throws(() => APITestCaller(APIClass, [{ description }]), {
 					name: 'APITestError',
 					code: APITestError.codes.RULE_INVALID_DESCRIPTION
+				});
+			});
+		});
+
+		it('when rule session is not an object nor a boolean', () => {
+
+			notAnObjectNorBoolean.forEach(session => {
+				assert.throws(() => APITestCaller(APIClass, [{ description: 'foo', session }]), {
+					name: 'APITestError',
+					code: APITestError.codes.RULE_INVALID_SESSION
 				});
 			});
 		});
