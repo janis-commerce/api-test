@@ -78,6 +78,9 @@ The text that will be added in the `it()` function. This fields is required.
 - **session** *object || boolean*
 An object with the API session, or `true` to set a default session. If it's falsy, it won't inject the session. For session details see [@janiscommerce/api-session](https://www.npmjs.com/package/@janiscommerce/api-session)
 
+- **client** *object*
+An object with the client that the session would fetch from BM in `client` getter. It it's not set, a default client is used. For session getters details see [@janiscommerce/api-session](https://www.npmjs.com/package/@janiscommerce/api-session)
+
 - **request** *object*
 An object with the request data. This field is
 
@@ -188,3 +191,4 @@ These are the possible validation errors.
 |7|Invalid Rule response headers. It means that the response headers you sent was not an object.|
 |8|Invalid Rule response cookies. It means that the response cookies you sent was not an object.|
 |9|Invalid Rule session. It means that the API Session you sent was not an object nor a boolean.|
+|10|Invalid Rule client. It means that the Client you sent was not an object.|
