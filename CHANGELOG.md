@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.0] - 2019-10-21
+### Added
+- Session client getter injection using `client` rule property
+
 ## [2.0.0] - 2019-10-02
 ### Changed
 - Now it works to test API v4
