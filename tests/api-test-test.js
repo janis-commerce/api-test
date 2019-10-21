@@ -30,7 +30,7 @@ describe('APITest', async () => {
 	}
 
 	APITestCaller(APIClass, '/custom/path/to/my/api', [{
-		description: 'should response an empty body and a 200 http code using a endpoint',
+		description: 'Should response an empty body and a 200 http code using a endpoint',
 		prepare: () => {},
 		request: {},
 		response: {
@@ -39,7 +39,7 @@ describe('APITest', async () => {
 		}
 	}]);
 
-	context('rules validation will fail', () => {
+	context('Rules validation will fail', () => {
 
 		const notAnArray = [1, true, 'foo', { a: 1 }];
 		const notAnObject = [1, true, 'foo', ['foo', 'bar']];
@@ -92,6 +92,16 @@ describe('APITest', async () => {
 				assert.throws(() => APITestCaller(APIClass, [{ description: 'foo', session }]), {
 					name: 'APITestError',
 					code: APITestError.codes.RULE_INVALID_SESSION
+				});
+			});
+		});
+
+		it('when client request is not an object', () => {
+
+			notAnObject.forEach(async client => {
+				assert.throws(() => APITestCaller(APIClass, [{ description: 'foo', client }]), {
+					name: 'APITestError',
+					code: APITestError.codes.RULE_INVALID_CLIENT
 				});
 			});
 		});
@@ -202,11 +212,10 @@ describe('APITest', async () => {
 				});
 			});
 		});
-
 	});
 
 	APITestCaller(APIClass, [{
-		description: 'should response an empty body and a 200 http code',
+		description: 'Should response an empty body and a 200 http code',
 		prepare: () => {},
 		request: {},
 		response: {
@@ -215,7 +224,7 @@ describe('APITest', async () => {
 		}
 	}]);
 
-	it('should reject when response codes doesn\'t match', async () => {
+	it('Should reject when response codes doesn\'t match', async () => {
 
 		const apiTest = new APITest(APIClass);
 
@@ -228,7 +237,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response body doesn\'t match', async () => {
+	it('Should reject when response body doesn\'t match', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -247,7 +256,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response headers doesn\'t match by name', async () => {
+	it('Should reject when response headers doesn\'t match by name', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -267,7 +276,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response headers doesn\'t match by value', async () => {
+	it('Should reject when response headers doesn\'t match by value', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -287,7 +296,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response headers doesn\'t match in strict mode', async () => {
+	it('Should reject when response headers doesn\'t match in strict mode', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -307,7 +316,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response cookies doesn\'t match by name', async () => {
+	it('Should reject when response cookies doesn\'t match by name', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -327,7 +336,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response cookies doesn\'t match by value', async () => {
+	it('Should reject when response cookies doesn\'t match by value', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -347,7 +356,7 @@ describe('APITest', async () => {
 		});
 	});
 
-	it('should reject when response cookies doesn\'t match in strict mode', async () => {
+	it('Should reject when response cookies doesn\'t match in strict mode', async () => {
 
 		class MyAPIClass extends API {
 			async process() {
@@ -368,7 +377,7 @@ describe('APITest', async () => {
 	});
 
 	APITestCaller(APICompleteClass, [{
-		description: 'should set response code, body, headers and cookie',
+		description: 'Should set response code, body, headers and cookie',
 		before: () => {},
 		after: () => {},
 		request: {
@@ -389,30 +398,38 @@ describe('APITest', async () => {
 		}
 	}]);
 
-
 	class APIClientClass extends API {
 
 		async process() {
 			this
-				.setBody({ clientCode: this.session.clientCode })
+				.setBody({
+					clientCode: this.session.clientCode,
+					client: await this.session.client
+				})
 				.setCode(200);
 		}
 	}
 
 	APITestCaller(APIClientClass, [{
-		description: 'should set response code and body with default session\'s client code',
+		description: 'Should set response code and body with default session\'s client',
 		session: true,
 		request: {
 			endpoint: 'custom-endpoint'
 		},
 		response: {
 			code: 200,
-			body: { clientCode: 'defaultClient' }
+			body: {
+				clientCode: 'defaultClient',
+				client: {
+					code: 'defaultClient',
+					id: 1
+				}
+			}
 		}
 	}]);
 
 	APITestCaller(APIClientClass, [{
-		description: 'should set response code, body with current injected client code',
+		description: 'Should set response code, body with current injected client code',
 		session: {
 			clientId: 1,
 			clientCode: 'my-client-code'
@@ -422,7 +439,40 @@ describe('APITest', async () => {
 		},
 		response: {
 			code: 200,
-			body: { clientCode: 'my-client-code' }
+			body: {
+				clientCode: 'my-client-code',
+				client: {
+					code: 'defaultClient',
+					id: 1
+				}
+			}
+		}
+	}]);
+
+	APITestCaller(APIClientClass, [{
+		description: 'Should set response code, body with current injected client code and client',
+		session: {
+			clientId: 1,
+			clientCode: 'my-client-code'
+		},
+		client: {
+			id: 1,
+			code: 'my-client-code',
+			customField: true
+		},
+		request: {
+			endpoint: 'custom-endpoint'
+		},
+		response: {
+			code: 200,
+			body: {
+				clientCode: 'my-client-code',
+				client: {
+					id: 1,
+					code: 'my-client-code',
+					customField: true
+				}
+			}
 		}
 	}]);
 
