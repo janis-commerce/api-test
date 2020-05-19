@@ -1,6 +1,6 @@
 {
   "name": "@janiscommerce/api-test",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A package for testing APIs developed with @janiscommerce/api",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,6 @@
   "dependencies": {
     "@janiscommerce/api": "^4.3.0",
     "@janiscommerce/api-session": "^1.4.0",
-    "sinon": "7.3.2"
+    "sinon": "^7.5.0"
   }
 }
