@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [3.0.1] - 2020-06-16
+### Fixed
+- defaultSessionData fixed with locations data
+
 ## [3.0.0] - 2020-06-16
 ### Changed
 - API upgraded to v5 (`api-session` validates locations) (**BREAKING CHANGE**)
