@@ -11,6 +11,15 @@ A package for testing APIs developed with [@janiscommerce/api](https://www.npmjs
 npm install @janiscommerce/api-test --save-dev
 ```
 
+### ⚠️ **Breaking changes from version *3.0.0*** ⚠️
+*Since 3.0.0*
+
+Upgraded [API](https://www.npmjs.com/package/@janiscommerce/api) dependency to `^5.x.x` and [API Session](https://www.npmjs.com/package/@janiscommerce/api-session) to `^2.x.x`
+
+The session of an api allows you to validates **locations** instead of **stores**
+
+For more information see [API](https://www.npmjs.com/package/@janiscommerce/api) and [API Session](https://www.npmjs.com/package/@janiscommerce/api-session)
+
 ## Usage
 `api-test` is called with a function that receives an API class and an Array of rules.
 For each rule, the module will create an `it()` block for creating an individual test.

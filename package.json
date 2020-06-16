@@ -1,6 +1,6 @@
 {
   "name": "@janiscommerce/api-test",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "A package for testing APIs developed with @janiscommerce/api",
   "main": "index.js",
   "scripts": {
@@ -18,12 +18,12 @@
   "license": "ISC",
   "homepage": "https://github.com/janis-commerce/api-test.git#readme",
   "devDependencies": {
-    "eslint": "^5.16.0",
+    "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.3",
     "husky": "^2.4.1",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0"
+    "mocha": "^8.0.1",
+    "nyc": "^15.1.0"
   },
   "files": [
     "lib/"
@@ -32,8 +32,8 @@
     "test": "tests"
   },
   "dependencies": {
-    "@janiscommerce/api": "^4.3.0",
-    "@janiscommerce/api-session": "^1.4.0",
-    "sinon": "^7.5.0"
+    "@janiscommerce/api": "^5.0.0",
+    "@janiscommerce/api-session": "^2.0.0",
+    "sinon": "^9.0.2"
   }
 }
