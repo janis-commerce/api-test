@@ -84,6 +84,9 @@ These are the components of a rule.
 - **description** *string*
 The text that will be added in the `it()` function. This fields is required.
 
+- **only** *boolean*
+If it's set to true, only this rule will be executed. Useful to debug when a test fails.
+
 - **session** *object || boolean*
 An object with the API session, or `true` to set a default session. If it's falsy, it won't inject the session. For session details see [@janiscommerce/api-session](https://www.npmjs.com/package/@janiscommerce/api-session)
 
