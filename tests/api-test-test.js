@@ -401,10 +401,14 @@ describe('APITest', async () => {
 	class APIClientClass extends API {
 
 		async process() {
+
+			const client = await this.session.client;
+			delete client.getInstance;
+
 			this
 				.setBody({
 					clientCode: this.session.clientCode,
-					client: await this.session.client
+					client
 				})
 				.setCode(200);
 		}
