@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.1.0] - 2020-11-11
+### Added
+- `rawData` property in requests
+
 ## [4.0.0] - 2020-08-27
 ### Added
 - GitHub Actions for build, coverage and publish
