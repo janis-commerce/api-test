@@ -116,6 +116,16 @@ describe('APITest', async () => {
 			});
 		});
 
+		it('when rule request.rawData is not aa string', () => {
+
+			notAString.forEach(rawData => {
+				assert.throws(() => APITestCaller(APIClass, [{ description: 'foo', request: { rawData } }]), {
+					name: 'APITestError',
+					code: APITestError.codes.RULE_INVALID_REQUEST
+				});
+			});
+		});
+
 		it('when rule response is missing', () => {
 			assert.throws(() => APITestCaller(APIClass, [{ description: 'foo' }]), {
 				name: 'APITestError',
