@@ -29,6 +29,29 @@ describe('APITest', async () => {
 		}
 	}
 
+	class APIWithError5xx extends API {
+
+		async process() {
+			throw new Error('Some error');
+		}
+	}
+
+	class APIWithError4xx extends API {
+
+		async validate() {
+			throw new Error('Some error');
+		}
+	}
+
+	class APIWithErrorAndCustomBody extends API {
+
+		async validate() {
+			const error = new Error('Some error');
+			error.body = { custom: true };
+			throw error;
+		}
+	}
+
 	APITestCaller(APIClass, '/custom/path/to/my/api', [{
 		description: 'Should response an empty body and a 200 http code using a endpoint',
 		prepare: () => {},
@@ -231,6 +254,36 @@ describe('APITest', async () => {
 		response: {
 			code: 200,
 			body: {}
+		}
+	}]);
+
+	APITestCaller(APIWithError5xx, [{
+		description: 'Should response body with message and a 500 http code',
+		prepare: () => {},
+		request: {},
+		response: {
+			code: 500,
+			body: { message: 'Some error' }
+		}
+	}]);
+
+	APITestCaller(APIWithError4xx, [{
+		description: 'Should response body with message and a 400 http code',
+		prepare: () => {},
+		request: {},
+		response: {
+			code: 400,
+			body: { message: 'Some error' }
+		}
+	}]);
+
+	APITestCaller(APIWithErrorAndCustomBody, [{
+		description: 'Should response body with message and a 400 http code',
+		prepare: () => {},
+		request: {},
+		response: {
+			code: 400,
+			body: { custom: true }
 		}
 	}]);
 
