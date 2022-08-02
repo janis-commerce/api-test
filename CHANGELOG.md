@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.2.1] - 2022-08-02
+### Fixed
+- Package typings for before and after callbacks
+
 ## [4.2.0] - 2022-08-02
 ### Added
 - Package typings to improve DX
