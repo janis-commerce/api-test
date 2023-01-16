@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.3.0] - 2023-01-16
+### Added
+- Add new property `serviceName` to `defaultSessionData`
+
 ## [4.2.1] - 2022-08-02
 ### Fixed
 - Package typings for before and after callbacks
