@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [5.0.0] - 2023-04-18
+### Changed
+- Update [@janiscommerce/api](https://www.npmjs.com/package/@janiscommerce/api) to version 7.0.0
+- Update [@janiscommerce/api-session](https://www.npmjs.com/package/@janiscommerce/api-session)
+
 ## [4.3.0] - 2023-01-16
 ### Added
 - Add new property `serviceName` to `defaultSessionData`
