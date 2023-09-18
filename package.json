@@ -1,6 +1,6 @@
 {
   "name": "@janiscommerce/api-test",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "A package for testing APIs developed with @janiscommerce/api",
   "main": "index.js",
   "scripts": {
