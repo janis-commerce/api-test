@@ -37,7 +37,7 @@
     "test": "tests"
   },
   "dependencies": {
-    "@janiscommerce/api": "^7.0.0",
+    "@janiscommerce/api": "^8.0.0",
     "@janiscommerce/api-session": "^3.4.0",
     "sinon": "^15.0.3"
   }
