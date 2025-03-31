@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Default session client, user and profile IDs are now ObjectIds instead of integers **BREAKING CHANGE**
-- Rule `client` is no longer supported. You must stub API session yourself. For example `sinon.stub(ApiSession.prototype, 'client').value(Promise.resolve({ /* yourClientData */ }));`.
+- Rule `client` is no longer supported. You must stub API session yourself. For example `sinon.stub(ApiSession.prototype, 'client').value(Promise.resolve({ /* yourClientData */ }));`. **BREAKING CHANGE**
+- Response `code` is now `statusCode` **BREAKING CHANGE**
 
 ## [6.0.0] - 2023-09-18
 ### Changed

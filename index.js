@@ -3,11 +3,11 @@
 const { APITest } = require('./lib');
 
 /**
- * @param {import('@janiscommerce/api').API} APIClass
+ * @param {import('./lib/api-test').ApiHandler} apiHandler
  * @param {string} endpoint
  * @param {import('./lib/api-test').TestRule[]} rules
  */
-module.exports = (APIClass, endpoint, rules) => {
-	const apiTest = new APITest(APIClass, endpoint, rules);
+module.exports = (apiHandler, endpoint, rules) => {
+	const apiTest = new APITest(apiHandler, endpoint, rules);
 	apiTest.test();
 };
