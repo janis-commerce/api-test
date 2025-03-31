@@ -9,24 +9,13 @@ module.exports = {
 		mocha: true
 	},
 
-	globals: {
-		__rootpath: true,
-		coreRequire: true,
-		mainRequire: true,
-		JANIS_CORE: true,
-		JANIS_ENV: true,
-		JANIS_ENV_ALIAS: true
-	},
-
 	parserOptions: {
-		sourceType: 'script'
-	},
-
-	settings: {
-		'import/core-modules': ['aws-sdk', 'lodash', 'yamljs', 'openapi-schema-validator']
+		sourceType: 'script',
+		ecmaVersion: 2024
 	},
 
 	rules: {
+		strict: ['error', 'global'],
 		'operator-linebreak': 0,
 		'no-continue': 0,
 		'no-plusplus': 0,
