@@ -85,6 +85,9 @@ An object with the API session, or `true` to set a default session. If it's fals
 - **client** *object*
 An object with the client that the session would fetch from BM in `client` getter. It it's not set, a default client is used. For session getters details see [@janiscommerce/api-session](https://www.npmjs.com/package/@janiscommerce/api-session)
 
+- **isExport** *boolean* _[Since 6.1.0]_
+Set to true to indicate that the API is used for exporting with Batch new Export feature.
+
 - **request** *object*
 An object with the request data. This field is
 
